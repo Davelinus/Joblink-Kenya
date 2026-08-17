@@ -1,0 +1,2709 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Job Seeker Dashboard | JobLink Kenya</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7fb;
+            color: #222;
+        }
+
+        /* =========================
+           NAVIGATION
+        ========================= */
+
+        nav {
+            background: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #1261d6;
+        }
+
+        .logo span {
+            color: #111;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #1261d6;
+            font-weight: bold;
+            margin-left: 20px;
+        }
+
+        .logout {
+            background: #dc3545;
+            color: white !important;
+            padding: 9px 15px;
+            border-radius: 6px;
+        }
+
+        /* =========================
+           NOTIFICATION BUTTON
+        ========================= */
+
+        .notification-btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #f4f7fb;
+            color: #1261d6;
+            border: none;
+            padding: 9px 13px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-left: 15px;
+        }
+
+        .notification-btn:hover {
+            background: #e5edff;
+        }
+
+        .notification-count {
+            position: absolute;
+            top: -7px;
+            right: -7px;
+            background: #dc3545;
+            color: white;
+            min-width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 11px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .notification-count.hidden {
+            display: none;
+        }
+
+
+        /* =========================
+           MAIN CONTAINER
+        ========================= */
+
+        .container {
+            width: 90%;
+            max-width: 1150px;
+            margin: 35px auto;
+        }
+
+
+        /* =========================
+           WELCOME
+        ========================= */
+
+        .welcome {
+            background: linear-gradient(
+                135deg,
+                #1261d6,
+                #063b91
+            );
+
+            color: white;
+
+            padding: 35px;
+
+            border-radius: 15px;
+
+            margin-bottom: 30px;
+        }
+
+        .welcome h1 {
+            margin-bottom: 10px;
+        }
+
+        .welcome p {
+            opacity: 0.9;
+        }
+
+
+        /* =========================
+           DASHBOARD
+        ========================= */
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 25px;
+        }
+
+
+        /* =========================
+           SIDEBAR
+        ========================= */
+
+        .sidebar {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.07);
+            height: fit-content;
+        }
+
+        .profile-icon {
+            width: 90px;
+            height: 90px;
+
+            border-radius: 50%;
+
+            background: #1261d6;
+
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin: 0 auto 15px;
+
+            font-size: 35px;
+            font-weight: bold;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        .sidebar p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .menu-btn {
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+
+            background: #f4f7fb;
+
+            margin-top: 10px;
+
+            border-radius: 7px;
+
+            text-align: left;
+
+            cursor: pointer;
+
+            font-size: 14px;
+        }
+
+        .menu-btn:hover {
+            background: #e5edff;
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .main {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+
+        /* =========================
+           CARD
+        ========================= */
+
+        .card {
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 3px 15px rgba(0,0,0,0.07);
+        }
+
+        .card h2 {
+            margin-bottom: 20px;
+        }
+
+
+        /* =========================
+           STATS
+        ========================= */
+
+        .stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4,1fr);
+
+            gap: 15px;
+        }
+
+        .stat {
+            background: #f4f7fb;
+
+            padding: 20px;
+
+            border-radius: 10px;
+
+            text-align: center;
+        }
+
+        .stat h3 {
+            font-size: 28px;
+
+            color: #1261d6;
+        }
+
+        .stat p {
+            color: #666;
+
+            margin-top: 5px;
+        }
+
+
+        /* =========================
+           NOTIFICATIONS
+        ========================= */
+
+        .notification-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .notification-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .notification-action-btn {
+            border: none;
+            padding: 9px 13px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .mark-read-btn {
+            background: #1261d6;
+            color: white;
+        }
+
+        .clear-notifications-btn {
+            background: #dc3545;
+            color: white;
+        }
+
+        .notification {
+            display: flex;
+            gap: 15px;
+            padding: 15px;
+            border-radius: 9px;
+            margin-bottom: 12px;
+            border: 1px solid #ddd;
+            background: white;
+        }
+
+        .notification.unread {
+            background: #eef5ff;
+            border-left: 5px solid #1261d6;
+        }
+
+        .notification-icon {
+            width: 42px;
+            height: 42px;
+            min-width: 42px;
+            border-radius: 50%;
+            background: #1261d6;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .notification-content {
+            flex: 1;
+        }
+
+        .notification-content h4 {
+            margin-bottom: 5px;
+            color: #1261d6;
+        }
+
+        .notification-content p {
+            margin-bottom: 5px;
+            line-height: 1.4;
+        }
+
+        .notification-time {
+            color: #777;
+            font-size: 12px;
+        }
+
+        .notification-empty {
+            color: #777;
+            padding: 10px 0;
+        }
+
+
+        /* =========================
+           JOB CARD
+        ========================= */
+
+        .job {
+            border: 1px solid #ddd;
+
+            padding: 20px;
+
+            border-radius: 10px;
+
+            margin-bottom: 15px;
+
+            background: white;
+        }
+
+        .job h3 {
+            color: #1261d6;
+
+            margin-bottom: 12px;
+
+            font-size: 20px;
+        }
+
+        .job p {
+            margin: 7px 0;
+
+            line-height: 1.5;
+        }
+
+        .job-description {
+            background: #f4f7fb;
+
+            padding: 15px;
+
+            border-radius: 8px;
+
+            margin-top: 12px;
+        }
+
+        .apply-btn {
+            margin-top: 15px;
+
+            padding: 11px 20px;
+
+            background: #1261d6;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+        }
+
+        .apply-btn:hover {
+            background: #084aa8;
+        }
+
+
+        /* =========================
+           APPLICATION CARD
+        ========================= */
+
+        .application {
+            border: 1px solid #ddd;
+
+            padding: 20px;
+
+            border-radius: 10px;
+
+            margin-bottom: 18px;
+        }
+
+        .application h3 {
+            color: #1261d6;
+
+            margin-bottom: 12px;
+        }
+
+        .application p {
+            margin: 7px 0;
+        }
+
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        .status {
+            display: inline-block;
+
+            padding: 7px 13px;
+
+            border-radius: 20px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+        }
+
+        .status-submitted {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-pending {
+            background: #e2e3e5;
+            color: #41464b;
+        }
+
+        .status-shortlisted {
+            background: #d1e7dd;
+            color: #0f5132;
+        }
+
+        .status-rejected {
+            background: #f8d7da;
+            color: #842029;
+        }
+
+        .status-interview {
+            background: #cfe2ff;
+            color: #084298;
+        }
+
+        .status-hired {
+            background: #198754;
+            color: white;
+        }
+
+
+        /* =========================
+           INTERVIEW
+        ========================= */
+
+        .interview-box {
+            background: #e7f1ff;
+
+            border-left: 5px solid #0d6efd;
+
+            padding: 18px;
+
+            border-radius: 8px;
+
+            margin-top: 15px;
+        }
+
+        .interview-box h4 {
+            color: #084298;
+
+            margin-bottom: 10px;
+        }
+
+        .interview-box p {
+            margin: 7px 0;
+        }
+
+
+        /* =========================
+           COVER LETTER
+        ========================= */
+
+        .cover-letter {
+            background: #f4f7fb;
+
+            padding: 15px;
+
+            border-radius: 8px;
+
+            margin-top: 15px;
+        }
+
+
+        /* =========================
+           EMPTY
+        ========================= */
+
+        .empty {
+            color: #777;
+
+            padding: 10px 0;
+        }
+
+
+        /* =========================
+           SEARCH
+        ========================= */
+
+        .search-box {
+            width: 100%;
+
+            padding: 13px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 7px;
+
+            margin-bottom: 20px;
+
+            font-size: 15px;
+        }
+
+
+        /* =========================
+           REFRESH
+        ========================= */
+
+        .refresh-btn {
+            background: #1261d6;
+
+            color: white;
+
+            border: none;
+
+            padding: 10px 16px;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            margin-bottom: 20px;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns:
+                    repeat(2,1fr);
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                padding: 15px 4%;
+            }
+
+            nav a {
+                margin-left: 8px;
+            }
+
+            .container {
+                width: 94%;
+            }
+
+            .notification-btn {
+                margin-left: 5px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVIGATION
+========================= -->
+
+<nav>
+
+    <div class="logo">
+        JobLink<span> Kenya</span>
+    </div>
+
+    <div>
+
+        <a href="#jobs">
+            Jobs
+        </a>
+
+        <a href="#applications">
+            Applications
+        </a>
+
+        <button
+            class="notification-btn"
+            onclick="showNotifications()"
+            title="Notifications"
+        >
+
+            🔔
+
+            <span
+                id="notificationCount"
+                class="notification-count hidden"
+            >
+                0
+            </span>
+
+        </button>
+
+        <a
+            href="index.html"
+            class="logout"
+        >
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<main class="container">
+
+
+    <!-- =========================
+         WELCOME
+    ========================= -->
+
+    <section class="welcome">
+
+        <h1>
+            Job Seeker Dashboard
+        </h1>
+
+        <p>
+            Find your next opportunity and track your applications.
+        </p>
+
+    </section>
+
+
+
+    <div class="dashboard">
+
+
+        <!-- =========================
+             SIDEBAR
+        ========================= -->
+
+        <aside class="sidebar">
+
+            <div
+                class="profile-icon"
+                id="profileIcon"
+            >
+                J
+            </div>
+
+            <h2 id="profileName">
+                Job Seeker
+            </h2>
+
+            <p>
+                Job Applicant
+            </p>
+
+
+            <button
+                class="menu-btn"
+                onclick="showJobs()"
+            >
+                🔎 Find Jobs
+            </button>
+
+
+            <button
+                class="menu-btn"
+                onclick="showApplications()"
+            >
+                📋 My Applications
+            </button>
+
+
+            <button
+                class="menu-btn"
+                onclick="showNotifications()"
+            >
+                🔔 Notifications
+
+                <span
+                    id="sidebarNotificationCount"
+                >
+                </span>
+
+            </button>
+
+
+            <button
+                class="menu-btn"
+                onclick="refreshDashboard()"
+            >
+                🔄 Refresh
+            </button>
+
+        </aside>
+
+
+
+        <!-- =========================
+             MAIN CONTENT
+        ========================= -->
+
+        <section class="main">
+
+
+            <!-- =========================
+                 STATISTICS
+            ========================= -->
+
+            <div class="card">
+
+                <h2>
+                    My Application Overview
+                </h2>
+
+
+                <div class="stats">
+
+
+                    <div class="stat">
+
+                        <h3 id="totalApplications">
+                            0
+                        </h3>
+
+                        <p>
+                            Applications
+                        </p>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <h3 id="shortlistedApplications">
+                            0
+                        </h3>
+
+                        <p>
+                            Shortlisted
+                        </p>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <h3 id="interviewApplications">
+                            0
+                        </h3>
+
+                        <p>
+                            Interviews
+                        </p>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <h3 id="hiredApplications">
+                            0
+                        </h3>
+
+                        <p>
+                            Hired
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =========================
+                 NOTIFICATIONS
+            ========================= -->
+
+            <div
+                class="card"
+                id="notifications"
+            >
+
+                <div class="notification-header">
+
+                    <h2>
+                        🔔 Notifications
+                    </h2>
+
+                    <div class="notification-actions">
+
+                        <button
+                            class="notification-action-btn mark-read-btn"
+                            onclick="markAllNotificationsRead()"
+                        >
+                            ✓ Mark All Read
+                        </button>
+
+                        <button
+                            class="notification-action-btn clear-notifications-btn"
+                            onclick="clearNotifications()"
+                        >
+                            🗑️ Clear
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div id="notificationsList">
+
+                    <p class="notification-empty">
+                        No notifications yet.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =========================
+                 JOBS
+            ========================= -->
+
+            <div
+                class="card"
+                id="jobs"
+            >
+
+                <h2>
+                    🔎 Available Jobs
+                </h2>
+
+
+                <input
+                    type="text"
+                    id="searchJobs"
+                    class="search-box"
+                    placeholder="Search jobs by title, company or location..."
+                    oninput="loadJobs()"
+                >
+
+
+                <div id="jobsList">
+
+                    <p class="empty">
+                        Loading jobs...
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =========================
+                 APPLICATIONS
+            ========================= -->
+
+            <div
+                class="card"
+                id="applications"
+            >
+
+                <h2>
+                    📋 My Applications
+                </h2>
+
+
+                <button
+                    class="refresh-btn"
+                    onclick="refreshDashboard()"
+                >
+                    🔄 Refresh Applications
+                </button>
+
+
+                <div id="applicationsList">
+
+                    <p class="empty">
+                        Loading applications...
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+    </div>
+
+</main>
+
+
+
+<script>
+
+
+/* =========================================
+   ESCAPE HTML
+========================================= */
+
+function escapeHtml(value) {
+
+    return String(value || "")
+
+        .replace(/&/g,"&amp;")
+
+        .replace(/</g,"&lt;")
+
+        .replace(/>/g,"&gt;")
+
+        .replace(/"/g,"&quot;")
+
+        .replace(/'/g,"&#039;");
+
+}
+
+
+
+/* =========================================
+   NOTIFICATION STORAGE
+========================================= */
+
+function getNotifications() {
+
+    return JSON.parse(
+        localStorage.getItem(
+            "jobLinkNotifications"
+        )
+    ) || [];
+
+}
+
+
+function saveNotifications(notifications) {
+
+    localStorage.setItem(
+        "jobLinkNotifications",
+        JSON.stringify(notifications)
+    );
+
+}
+
+
+
+/* =========================================
+   APPLICATION UNIQUE ID
+========================================= */
+
+function getApplicationKey(application, index) {
+
+    return String(
+        application.id ||
+        application.applicationId ||
+        (
+            (application.jobId || "job") +
+            "|" +
+            (application.email || "email") +
+            "|" +
+            (application.date || "date") +
+            "|" +
+            (application.job || "job") +
+            "|" +
+            index
+        )
+    );
+
+}
+
+
+
+/* =========================================
+   NOTIFICATION ICON
+========================================= */
+
+function getNotificationIcon(status) {
+
+    if (status === "Shortlisted") {
+        return "✅";
+    }
+
+    if (status === "Rejected") {
+        return "❌";
+    }
+
+    if (status === "Pending") {
+        return "⏳";
+    }
+
+    if (status === "Interview Scheduled") {
+        return "🎤";
+    }
+
+    if (status === "Hired") {
+        return "👑";
+    }
+
+    return "📢";
+
+}
+
+
+
+/* =========================================
+   NOTIFICATION MESSAGE
+========================================= */
+
+function getNotificationMessage(
+    status,
+    application
+) {
+
+    const job =
+        application.job ||
+        "your job application";
+
+
+    if (status === "Shortlisted") {
+
+        return {
+            title: "Application Shortlisted",
+            message:
+                `Great news! Your application for "${job}" has been shortlisted.`
+        };
+
+    }
+
+
+    if (status === "Rejected") {
+
+        return {
+            title: "Application Update",
+            message:
+                `Your application for "${job}" was not selected at this time.`
+        };
+
+    }
+
+
+    if (status === "Pending") {
+
+        return {
+            title: "Application Pending",
+            message:
+                `Your application for "${job}" is currently pending review.`
+        };
+
+    }
+
+
+    if (status === "Interview Scheduled") {
+
+        return {
+            title: "Interview Scheduled",
+            message:
+                `Your application for "${job}" has an interview scheduled. Check your application for the interview details.`
+        };
+
+    }
+
+
+    if (status === "Hired") {
+
+        return {
+            title: "Congratulations! 🎉",
+            message:
+                `Congratulations! You have been hired for "${job}".`
+        };
+
+    }
+
+
+    return {
+        title: "Application Updated",
+        message:
+            `Your application for "${job}" has been updated to "${status}".`
+    };
+
+}
+
+
+
+/* =========================================
+   CREATE NOTIFICATION
+========================================= */
+
+function createNotification(
+    status,
+    application,
+    key
+) {
+
+    const notifications =
+        getNotifications();
+
+
+    const message =
+        getNotificationMessage(
+            status,
+            application
+        );
+
+
+    const notification = {
+
+        id:
+            Date.now() +
+            "-" +
+            Math.random()
+                .toString(36)
+                .substring(2,8),
+
+        applicationKey:
+            key,
+
+        status:
+            status,
+
+        title:
+            message.title,
+
+        message:
+            message.message,
+
+        job:
+            application.job ||
+            "Unknown Job",
+
+        date:
+            new Date().toLocaleString(),
+
+        read:
+            false
+
+    };
+
+
+    notifications.unshift(
+        notification
+    );
+
+
+    saveNotifications(
+        notifications
+    );
+
+}
+
+
+
+/* =========================================
+   CHECK APPLICATION STATUS CHANGES
+========================================= */
+
+function checkForApplicationUpdates() {
+
+    const applications =
+        JSON.parse(
+            localStorage.getItem(
+                "jobApplications"
+            )
+        ) || [];
+
+
+    const previousStatuses =
+        JSON.parse(
+            localStorage.getItem(
+                "jobLinkLastSeenStatuses"
+            )
+        ) || {};
+
+
+    let changed = false;
+
+
+    applications.forEach(
+        function(application,index) {
+
+            const key =
+                getApplicationKey(
+                    application,
+                    index
+                );
+
+
+            const currentStatus =
+                application.status ||
+                "Submitted";
+
+
+            const currentInterview =
+                application.interview
+                ?
+                JSON.stringify(
+                    application.interview
+                )
+                :
+                "";
+
+
+            const previous =
+                previousStatuses[key];
+
+
+            /*
+               FIRST TIME SEEING APPLICATION
+            */
+
+            if (!previous) {
+
+                previousStatuses[key] = {
+
+                    status:
+                        currentStatus,
+
+                    interview:
+                        currentInterview
+
+                };
+
+                changed = true;
+
+                return;
+
+            }
+
+
+            /*
+               STATUS CHANGED
+            */
+
+            if (
+                previous.status !==
+                currentStatus
+            ) {
+
+                createNotification(
+                    currentStatus,
+                    application,
+                    key
+                );
+
+
+                previousStatuses[key] = {
+
+                    status:
+                        currentStatus,
+
+                    interview:
+                        currentInterview
+
+                };
+
+
+                changed = true;
+
+                return;
+
+            }
+
+
+            /*
+               INTERVIEW DETAILS CHANGED
+            */
+
+            if (
+                currentStatus ===
+                "Interview Scheduled" &&
+
+                previous.interview !==
+                currentInterview
+            ) {
+
+                const notifications =
+                    getNotifications();
+
+
+                notifications.unshift({
+
+                    id:
+                        Date.now() +
+                        "-" +
+                        Math.random()
+                            .toString(36)
+                            .substring(2,8),
+
+                    applicationKey:
+                        key,
+
+                    status:
+                        "Interview Scheduled",
+
+                    title:
+                        "Interview Details Updated",
+
+                    message:
+                        `The interview details for "${application.job || "your application"}" have been updated. Check your application for the latest details.`,
+
+                    job:
+                        application.job ||
+                        "Unknown Job",
+
+                    date:
+                        new Date()
+                            .toLocaleString(),
+
+                    read:
+                        false
+
+                });
+
+
+                saveNotifications(
+                    notifications
+                );
+
+
+                previousStatuses[key] = {
+
+                    status:
+                        currentStatus,
+
+                    interview:
+                        currentInterview
+
+                };
+
+
+                changed = true;
+
+            }
+
+        }
+    );
+
+
+    if (changed) {
+
+        localStorage.setItem(
+            "jobLinkLastSeenStatuses",
+            JSON.stringify(
+                previousStatuses
+            )
+        );
+
+    }
+
+
+    loadNotifications();
+
+}
+
+
+
+/* =========================================
+   LOAD NOTIFICATIONS
+========================================= */
+
+function loadNotifications() {
+
+    const notifications =
+        getNotifications();
+
+
+    const container =
+        document.getElementById(
+            "notificationsList"
+        );
+
+
+    if (
+        notifications.length === 0
+    ) {
+
+        container.innerHTML = `
+
+            <p class="notification-empty">
+
+                🔔 No notifications yet.
+
+            </p>
+
+        `;
+
+        updateNotificationCount();
+
+        return;
+
+    }
+
+
+    container.innerHTML = "";
+
+
+    notifications.forEach(
+        function(notification) {
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+
+            div.className =
+                notification.read
+                ?
+                "notification"
+                :
+                "notification unread";
+
+
+            div.innerHTML = `
+
+                <div class="notification-icon">
+
+                    ${escapeHtml(
+                        getNotificationIcon(
+                            notification.status
+                        )
+                    )}
+
+                </div>
+
+
+                <div class="notification-content">
+
+                    <h4>
+
+                        ${escapeHtml(
+                            notification.title
+                        )}
+
+                    </h4>
+
+
+                    <p>
+
+                        ${escapeHtml(
+                            notification.message
+                        )}
+
+                    </p>
+
+
+                    <div class="notification-time">
+
+                        ${escapeHtml(
+                            notification.date
+                        )}
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            div.onclick =
+                function() {
+
+                    markNotificationRead(
+                        notification.id
+                    );
+
+                };
+
+
+            container.appendChild(
+                div
+            );
+
+        }
+    );
+
+
+    updateNotificationCount();
+
+}
+
+
+
+/* =========================================
+   UPDATE NOTIFICATION COUNT
+========================================= */
+
+function updateNotificationCount() {
+
+    const notifications =
+        getNotifications();
+
+
+    const unread =
+        notifications.filter(
+            function(notification) {
+
+                return !notification.read;
+
+            }
+        ).length;
+
+
+    const count =
+        document.getElementById(
+            "notificationCount"
+        );
+
+
+    const sidebarCount =
+        document.getElementById(
+            "sidebarNotificationCount"
+        );
+
+
+    if (unread > 0) {
+
+        count.textContent =
+            unread;
+
+        count.classList.remove(
+            "hidden"
+        );
+
+        sidebarCount.textContent =
+            ` (${unread} new)`;
+
+    }
+
+    else {
+
+        count.textContent =
+            "0";
+
+        count.classList.add(
+            "hidden"
+        );
+
+        sidebarCount.textContent =
+            "";
+
+    }
+
+}
+
+
+
+/* =========================================
+   MARK ONE NOTIFICATION READ
+========================================= */
+
+function markNotificationRead(id) {
+
+    const notifications =
+        getNotifications();
+
+
+    notifications.forEach(
+        function(notification) {
+
+            if (
+                notification.id === id
+            ) {
+
+                notification.read =
+                    true;
+
+            }
+
+        }
+    );
+
+
+    saveNotifications(
+        notifications
+    );
+
+
+    loadNotifications();
+
+}
+
+
+
+/* =========================================
+   MARK ALL READ
+========================================= */
+
+function markAllNotificationsRead() {
+
+    const notifications =
+        getNotifications();
+
+
+    notifications.forEach(
+        function(notification) {
+
+            notification.read =
+                true;
+
+        }
+    );
+
+
+    saveNotifications(
+        notifications
+    );
+
+
+    loadNotifications();
+
+}
+
+
+
+/* =========================================
+   CLEAR NOTIFICATIONS
+========================================= */
+
+function clearNotifications() {
+
+    const notifications =
+        getNotifications();
+
+
+    if (
+        notifications.length === 0
+    ) {
+
+        return;
+
+    }
+
+
+    const confirmClear =
+        confirm(
+            "Are you sure you want to clear all notifications?"
+        );
+
+
+    if (!confirmClear) {
+
+        return;
+
+    }
+
+
+    localStorage.removeItem(
+        "jobLinkNotifications"
+    );
+
+
+    loadNotifications();
+
+}
+
+
+
+/* =========================================
+   SHOW NOTIFICATIONS
+========================================= */
+
+function showNotifications() {
+
+    document
+        .getElementById(
+            "notifications"
+        )
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+
+/* =========================================
+   LOAD JOBS
+========================================= */
+
+function loadJobs() {
+
+    const jobs =
+        JSON.parse(
+            localStorage.getItem(
+                "jobLinkJobs"
+            )
+        ) || [];
+
+
+    const searchInput =
+        document.getElementById(
+            "searchJobs"
+        );
+
+
+    const search =
+        searchInput
+        ?
+        searchInput.value
+            .toLowerCase()
+            .trim()
+        :
+        "";
+
+
+    const container =
+        document.getElementById(
+            "jobsList"
+        );
+
+
+    const filteredJobs =
+        jobs.filter(
+            function(job) {
+
+                const title =
+                    String(
+                        job.title || ""
+                    ).toLowerCase();
+
+
+                const company =
+                    String(
+                        job.company || ""
+                    ).toLowerCase();
+
+
+                const location =
+                    String(
+                        job.location || ""
+                    ).toLowerCase();
+
+
+                return (
+
+                    title.includes(search) ||
+
+                    company.includes(search) ||
+
+                    location.includes(search)
+
+                );
+
+            }
+        );
+
+
+    if (
+        filteredJobs.length === 0
+    ) {
+
+        container.innerHTML = `
+
+            <p class="empty">
+                No jobs found.
+            </p>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML = "";
+
+
+    filteredJobs.forEach(
+        function(job) {
+
+
+            const originalIndex =
+                jobs.indexOf(job);
+
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+
+            div.className =
+                "job";
+
+
+            div.innerHTML = `
+
+                <h3>
+
+                    💼
+                    ${escapeHtml(
+                        job.title ||
+                        "Untitled Job"
+                    )}
+
+                </h3>
+
+
+                <p>
+
+                    🏢
+                    <strong>
+                        Company:
+                    </strong>
+
+                    ${escapeHtml(
+                        job.company ||
+                        "Not provided"
+                    )}
+
+                </p>
+
+
+                <p>
+
+                    📍
+                    <strong>
+                        Location:
+                    </strong>
+
+                    ${escapeHtml(
+                        job.location ||
+                        "Not provided"
+                    )}
+
+                </p>
+
+
+                <p>
+
+                    💰
+                    <strong>
+                        Salary:
+                    </strong>
+
+                    ${escapeHtml(
+                        job.salary ||
+                        "Not provided"
+                    )}
+
+                </p>
+
+
+                <p>
+
+                    💼
+                    <strong>
+                        Type:
+                    </strong>
+
+                    ${escapeHtml(
+                        job.type ||
+                        "Not provided"
+                    )}
+
+                </p>
+
+
+                <p>
+
+                    🛠️
+                    <strong>
+                        Skills:
+                    </strong>
+
+                    ${escapeHtml(
+                        job.skills ||
+                        "Not provided"
+                    )}
+
+                </p>
+
+
+                <p>
+
+                    🆔
+                    <strong>
+                        Job ID:
+                    </strong>
+
+                    ${escapeHtml(
+                        job.jobId ||
+                        "Not available"
+                    )}
+
+                </p>
+
+
+                <div class="job-description">
+
+                    <strong>
+                        📝 Job Description
+                    </strong>
+
+                    <p>
+
+                        ${escapeHtml(
+                            job.description ||
+                            "No description provided."
+                        )}
+
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="apply-btn"
+                    onclick="
+                        applyForJob(
+                            ${originalIndex}
+                        )
+                    "
+                >
+
+                    Apply Now →
+
+                </button>
+
+            `;
+
+
+            container.appendChild(
+                div
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =========================================
+   APPLY FOR JOB
+========================================= */
+
+function applyForJob(index) {
+
+    const jobs =
+        JSON.parse(
+            localStorage.getItem(
+                "jobLinkJobs"
+            )
+        ) || [];
+
+
+    const job =
+        jobs[index];
+
+
+    if (!job) {
+
+        alert(
+            "Sorry, this job could not be found."
+        );
+
+        return;
+
+    }
+
+
+    localStorage.setItem(
+        "selectedJob",
+        JSON.stringify(job)
+    );
+
+
+    window.location.href =
+        "apply.html";
+
+}
+
+
+
+/* =========================================
+   LOAD APPLICATIONS
+========================================= */
+
+function loadApplications() {
+
+    const applications =
+        JSON.parse(
+            localStorage.getItem(
+                "jobApplications"
+            )
+        ) || [];
+
+
+    const container =
+        document.getElementById(
+            "applicationsList"
+        );
+
+
+    /* =====================================
+       STATISTICS
+    ===================================== */
+
+    document.getElementById(
+        "totalApplications"
+    ).textContent =
+        applications.length;
+
+
+    document.getElementById(
+        "shortlistedApplications"
+    ).textContent =
+        applications.filter(
+            function(app) {
+
+                return (
+                    app.status ===
+                    "Shortlisted"
+                );
+
+            }
+        ).length;
+
+
+    document.getElementById(
+        "interviewApplications"
+    ).textContent =
+        applications.filter(
+            function(app) {
+
+                return (
+                    app.status ===
+                    "Interview Scheduled"
+                );
+
+            }
+        ).length;
+
+
+    document.getElementById(
+        "hiredApplications"
+    ).textContent =
+        applications.filter(
+            function(app) {
+
+                return (
+                    app.status ===
+                    "Hired"
+                );
+
+            }
+        ).length;
+
+
+
+    /* =====================================
+       NO APPLICATIONS
+    ===================================== */
+
+    if (
+        applications.length === 0
+    ) {
+
+        container.innerHTML = `
+
+            <p class="empty">
+                You have not submitted any applications yet.
+            </p>
+
+        `;
+
+        return;
+
+    }
+
+
+
+    /* =====================================
+       DISPLAY APPLICATIONS
+    ===================================== */
+
+    container.innerHTML = "";
+
+
+    applications.forEach(
+        function(application) {
+
+
+            const status =
+                application.status ||
+                "Submitted";
+
+
+            let statusClass =
+                "status-submitted";
+
+
+            if (
+                status === "Pending"
+            ) {
+
+                statusClass =
+                    "status-pending";
+
+            }
+
+
+            if (
+                status === "Shortlisted"
+            ) {
+
+                statusClass =
+                    "status-shortlisted";
+
+            }
+
+
+            if (
+                status === "Rejected"
+            ) {
+
+                statusClass =
+                    "status-rejected";
+
+            }
+
+
+            if (
+                status ===
+                "Interview Scheduled"
+            ) {
+
+                statusClass =
+                    "status-interview";
+
+            }
+
+
+            if (
+                status === "Hired"
+            ) {
+
+                statusClass =
+                    "status-hired";
+
+            }
+
+
+
+            /* =================================
+               INTERVIEW INFORMATION
+            ================================= */
+
+            let interviewHTML = "";
+
+
+            if (
+                application.interview &&
+                status ===
+                "Interview Scheduled"
+            ) {
+
+                interviewHTML = `
+
+                    <div class="interview-box">
+
+                        <h4>
+                            🎤 Interview Scheduled
+                        </h4>
+
+
+                        <p>
+
+                            📅
+                            <strong>
+                                Date:
+                            </strong>
+
+                            ${escapeHtml(
+                                application
+                                    .interview
+                                    .date
+                            )}
+
+                        </p>
+
+
+                        <p>
+
+                            ⏰
+                            <strong>
+                                Time:
+                            </strong>
+
+                            ${escapeHtml(
+                                application
+                                    .interview
+                                    .time
+                            )}
+
+                        </p>
+
+
+                        <p>
+
+                            📍
+                            <strong>
+                                Location:
+                            </strong>
+
+                            ${escapeHtml(
+                                application
+                                    .interview
+                                    .location
+                            )}
+
+                        </p>
+
+
+                        ${
+                            application
+                                .interview
+                                .notes
+
+                            ?
+
+                            `
+
+                            <p>
+
+                                📝
+                                <strong>
+                                    Notes:
+                                </strong>
+
+                                ${escapeHtml(
+                                    application
+                                        .interview
+                                        .notes
+                                )}
+
+                            </p>
+
+                            `
+
+                            :
+
+                            ""
+
+                        }
+
+                    </div>
+
+                `;
+
+            }
+
+
+
+            /* =================================
+               APPLICATION CARD
+            ================================= */
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+
+            div.className =
+                "application";
+
+
+            div.innerHTML = `
+
+                <h3>
+
+                    💼
+                    ${escapeHtml(
+                        application.job ||
+                        "Unknown Job"
+                    )}
+
+                </h3>
+
+
+                <p>
+
+                    🏢
+                    <strong>
+                        Company:
+                    </strong>
+
+                    ${escapeHtml(
+                        application.company ||
+                        "Not provided"
+                    )}
+
+                </p>
+
+
+                <p>
+
+                    📍
+                    <strong>
+                        Location:
+                    </strong>
+
+                    ${escapeHtml(
+                        application.location ||
+                        "Not provided"
+                    )}
+
+                </p>
+
+
+                <p>
+
+                    💰
+                    <strong>
+                        Salary:
+                    </strong>
+
+                    ${escapeHtml(
+                        application.salary ||
+                        "Not provided"
+                    )}
+
+                </p>
+
+
+                <p>
+
+                    🆔
+                    <strong>
+                        Job ID:
+                    </strong>
+
+                    ${escapeHtml(
+                        application.jobId ||
+                        "Not available"
+                    )}
+
+                </p>
+
+
+                <p>
+
+                    📧
+                    <strong>
+                        Email:
+                    </strong>
+
+                    ${escapeHtml(
+                        application.email ||
+                        "Not provided"
+                    )}
+
+                </p>
+
+
+                <p>
+
+                    📱
+                    <strong>
+                        Phone:
+                    </strong>
+
+                    ${escapeHtml(
+                        application.phone ||
+                        "Not provided"
+                    )}
+
+                </p>
+
+
+                <p>
+
+                    🛠️
+                    <strong>
+                        Skills:
+                    </strong>
+
+                    ${escapeHtml(
+                        application.skills ||
+                        "Not provided"
+                    )}
+
+                </p>
+
+
+                <p>
+
+                    📅
+                    <strong>
+                        Applied:
+                    </strong>
+
+                    ${escapeHtml(
+                        application.date ||
+                        "Not available"
+                    )}
+
+                </p>
+
+
+                <p>
+
+                    🟡
+                    <strong>
+                        Application Status:
+                    </strong>
+
+
+                    <span
+                        class="
+                            status
+                            ${statusClass}
+                        "
+                    >
+
+                        ${escapeHtml(
+                            status
+                        )}
+
+                    </span>
+
+                </p>
+
+
+                <div class="cover-letter">
+
+                    <strong>
+                        📝 Cover Letter
+                    </strong>
+
+                    <p>
+
+                        ${escapeHtml(
+                            application.coverLetter ||
+                            "No cover letter provided."
+                        )}
+
+                    </p>
+
+                </div>
+
+
+                ${interviewHTML}
+
+            `;
+
+
+            container.appendChild(
+                div
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =========================================
+   REFRESH
+========================================= */
+
+function refreshDashboard() {
+
+    checkForApplicationUpdates();
+
+    loadJobs();
+
+    loadApplications();
+
+    loadProfileName();
+
+}
+
+
+
+/* =========================================
+   SCROLL TO JOBS
+========================================= */
+
+function showJobs() {
+
+    document
+        .getElementById(
+            "jobs"
+        )
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+
+/* =========================================
+   SCROLL TO APPLICATIONS
+========================================= */
+
+function showApplications() {
+
+    document
+        .getElementById(
+            "applications"
+        )
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+
+/* =========================================
+   PROFILE NAME
+========================================= */
+
+function loadProfileName() {
+
+    const applications =
+        JSON.parse(
+            localStorage.getItem(
+                "jobApplications"
+            )
+        ) || [];
+
+
+    if (
+        applications.length > 0 &&
+        applications[0].applicant
+    ) {
+
+        const name =
+            applications[0].applicant;
+
+
+        document.getElementById(
+            "profileName"
+        ).textContent =
+            name;
+
+
+        document.getElementById(
+            "profileIcon"
+        ).textContent =
+            name
+                .charAt(0)
+                .toUpperCase();
+
+    }
+
+}
+
+
+
+/* =========================================
+   INITIAL LOAD
+========================================= */
+
+loadJobs();
+
+loadApplications();
+
+loadProfileName();
+
+loadNotifications();
+
+checkForApplicationUpdates();
+
+
+
+/* =========================================
+   AUTO REFRESH
+========================================= */
+
+setInterval(
+    function() {
+
+        checkForApplicationUpdates();
+
+        loadJobs();
+
+        loadApplications();
+
+        loadProfileName();
+
+    },
+    3000
+);
+
+
+</script>
+
+
+</body>
+
+</html>

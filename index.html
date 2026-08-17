@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JobLink Kenya</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #222;
+        }
+
+        /* NAVIGATION */
+
+        nav {
+            background: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #1261d6;
+        }
+
+        .logo span {
+            color: #111;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .register {
+            background: #1261d6;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 6px;
+        }
+
+        /* HERO */
+
+        .hero {
+            background: linear-gradient(135deg, #1261d6, #063b91);
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 19px;
+            max-width: 650px;
+            margin: auto;
+            line-height: 1.6;
+        }
+
+        .hero button {
+            margin-top: 30px;
+            padding: 14px 25px;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* SEARCH */
+
+        .search {
+            background: white;
+            max-width: 1000px;
+            margin: -40px auto 50px;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+
+            display: flex;
+            gap: 10px;
+        }
+
+        .search input,
+        .search select {
+            flex: 1;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+
+        .search button {
+            background: #1261d6;
+            color: white;
+            border: none;
+            padding: 14px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        /* SECTIONS */
+
+        .section {
+            padding: 60px 7%;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .title h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .title p {
+            color: #666;
+        }
+
+        /* CATEGORIES */
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .category {
+            background: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+        }
+
+        .category h3 {
+            margin-top: 10px;
+        }
+
+        .icon {
+            font-size: 40px;
+        }
+
+        /* JOBS */
+
+        .jobs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .job {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.07);
+        }
+
+        .job h3 {
+            color: #1261d6;
+            margin-bottom: 10px;
+        }
+
+        .job p {
+            line-height: 1.8;
+            color: #666;
+        }
+
+        .apply {
+            margin-top: 15px;
+            background: #1261d6;
+            color: white;
+            border: none;
+            padding: 11px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        /* EMPLOYER */
+
+        .employer {
+            margin: 50px 7%;
+            padding: 60px 20px;
+            background: #1261d6;
+            color: white;
+            text-align: center;
+            border-radius: 15px;
+        }
+
+        .employer h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .employer button {
+            margin-top: 20px;
+            padding: 13px 25px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #111827;
+            color: white;
+            padding: 50px 7%;
+            margin-top: 50px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        footer p {
+            color: #bbb;
+            line-height: 1.7;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #aaa;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 768px) {
+
+            nav ul {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .search {
+                margin: -30px 20px 40px;
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVIGATION -->
+
+    <nav>
+
+        <div class="logo">
+            JobLink<span> Kenya</span>
+        </div>
+
+        <ul>
+
+            <li>
+                <a href="#">Home</a>
+            </li>
+
+            <li>
+                <a href="#jobs">Find Jobs</a>
+            </li>
+
+            <li>
+                <a href="#categories">Categories</a>
+            </li>
+
+            <li>
+                <a href="#employer">Employers</a>
+            </li>
+
+            <li>
+                <a href="#">Login</a>
+            </li>
+
+            <li>
+                <a href="#" class="register">Register</a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <h1>
+            Find Your Next Opportunity
+        </h1>
+
+        <p>
+            JobLink Kenya connects talented job seekers
+            with employers looking for the right people.
+        </p>
+
+        <button onclick="findJobs()">
+            Find Jobs
+        </button>
+
+    </section>
+
+
+    <!-- SEARCH -->
+
+    <div class="search">
+
+        <input
+            type="text"
+            id="keyword"
+            placeholder="Job title or keyword"
+        >
+
+        <select id="location">
+
+            <option value="">
+                Location
+            </option>
+
+            <option>
+                Nairobi
+            </option>
+
+            <option>
+                Mombasa
+            </option>
+
+            <option>
+                Kisumu
+            </option>
+
+            <option>
+                Nakuru
+            </option>
+
+            <option>
+                Embu
+            </option>
+
+            <option>
+                Remote
+            </option>
+
+        </select>
+
+        <button onclick="searchJobs()">
+            Search
+        </button>
+
+    </div>
+
+
+    <!-- CATEGORIES -->
+
+    <section class="section" id="categories">
+
+        <div class="title">
+
+            <h2>
+                Explore Job Categories
+            </h2>
+
+            <p>
+                Find opportunities in different industries.
+            </p>
+
+        </div>
+
+
+        <div class="categories">
+
+
+            <div class="category">
+
+                <div class="icon">
+                    🏗️
+                </div>
+
+                <h3>
+                    Construction
+                </h3>
+
+            </div>
+
+
+            <div class="category">
+
+                <div class="icon">
+                    🏠
+                </div>
+
+                <h3>
+                    Architecture
+                </h3>
+
+            </div>
+
+
+            <div class="category">
+
+                <div class="icon">
+                    💻
+                </div>
+
+                <h3>
+                    Technology
+                </h3>
+
+            </div>
+
+
+            <div class="category">
+
+                <div class="icon">
+                    💰
+                </div>
+
+                <h3>
+                    Finance
+                </h3>
+
+            </div>
+
+
+            <div class="category">
+
+                <div class="icon">
+                    📢
+                </div>
+
+                <h3>
+                    Marketing
+                </h3>
+
+            </div>
+
+
+            <div class="category">
+
+                <div class="icon">
+                    🏨
+                </div>
+
+                <h3>
+                    Hospitality
+                </h3>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- JOBS -->
+
+    <section class="section" id="jobs">
+
+        <div class="title">
+
+            <h2>
+                Featured Jobs
+            </h2>
+
+            <p>
+                Discover opportunities available on JobLink Kenya.
+            </p>
+
+        </div>
+
+
+        <div class="jobs" id="jobList">
+
+
+            <div class="job">
+
+                <h3>
+                    Junior Architectural Designer
+                </h3>
+
+                <p>
+                    🏢 BuildSpace Kenya
+                </p>
+
+                <p>
+                    📍 Nairobi
+                </p>
+
+                <p>
+                    💰 KSh 35,000 - 50,000
+                </p>
+
+                <p>
+                    💼 Full-time
+                </p>
+
+                <button
+                    class="apply"
+                    onclick="applyJob('Junior Architectural Designer')"
+                >
+                    Apply Now
+                </button>
+
+            </div>
+
+
+            <div class="job">
+
+                <h3>
+                    Graphic Designer
+                </h3>
+
+                <p>
+                    🏢 Creative Hub Kenya
+                </p>
+
+                <p>
+                    📍 Nairobi
+                </p>
+
+                <p>
+                    💰 KSh 25,000 - 40,000
+                </p>
+
+                <p>
+                    💼 Full-time
+                </p>
+
+                <button
+                    class="apply"
+                    onclick="applyJob('Graphic Designer')"
+                >
+                    Apply Now
+                </button>
+
+            </div>
+
+
+            <div class="job">
+
+                <h3>
+                    Junior Software Developer
+                </h3>
+
+                <p>
+                    🏢 Tech Solutions Africa
+                </p>
+
+                <p>
+                    📍 Remote
+                </p>
+
+                <p>
+                    💰 KSh 40,000 - 70,000
+                </p>
+
+                <p>
+                    💼 Full-time
+                </p>
+
+                <button
+                    class="apply"
+                    onclick="applyJob('Junior Software Developer')"
+                >
+                    Apply Now
+                </button>
+
+            </div>
+
+
+            <div class="job">
+
+                <h3>
+                    Sales Representative
+                </h3>
+
+                <p>
+                    🏢 Kenya Business Group
+                </p>
+
+                <p>
+                    📍 Mombasa
+                </p>
+
+                <p>
+                    💰 KSh 30,000 - 45,000
+                </p>
+
+                <p>
+                    💼 Full-time
+                </p>
+
+                <button
+                    class="apply"
+                    onclick="applyJob('Sales Representative')"
+                >
+                    Apply Now
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- EMPLOYERS -->
+
+    <section class="employer" id="employer">
+
+        <h2>
+            Are You Hiring?
+        </h2>
+
+        <p>
+            Find talented people for your business.
+        </p>
+
+        <button onclick="postJob()">
+            Post a Job
+        </button>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="footer-grid">
+
+
+            <div>
+
+                <h3>
+                    JobLink Kenya
+                </h3>
+
+                <p>
+                    Connecting Talent With Opportunity.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Job Seekers
+                </h3>
+
+                <p>
+                    Find Jobs
+                </p>
+
+                <p>
+                    Create Profile
+                </p>
+
+                <p>
+                    Apply for Jobs
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Employers
+                </h3>
+
+                <p>
+                    Post a Job
+                </p>
+
+                <p>
+                    Find Candidates
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Safety
+                </h3>
+
+                <p>
+                    Never send money to someone claiming
+                    that you must pay a recruitment fee before
+                    receiving a job.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="copyright">
+
+            © 2026 JobLink Kenya.
+            All rights reserved.
+
+        </div>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        function findJobs() {
+
+            document
+                .getElementById("jobs")
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+
+        }
+
+
+        function applyJob(jobName) {
+
+            alert(
+                "You selected: " +
+                jobName +
+                "\n\nThe application system will be added next."
+            );
+
+        }
+
+
+        function postJob() {
+
+            alert(
+                "Employer section\n\n" +
+                "The job posting system will be added next."
+            );
+
+        }
+
+
+        function searchJobs() {
+
+            let keyword =
+                document
+                .getElementById("keyword")
+                .value
+                .toLowerCase();
+
+            let location =
+                document
+                .getElementById("location")
+                .value
+                .toLowerCase();
+
+
+            let jobs =
+                document
+                .querySelectorAll(".job");
+
+
+            jobs.forEach(function(job) {
+
+                let text =
+                    job.innerText.toLowerCase();
+
+
+                let matchesKeyword =
+                    keyword === "" ||
+                    text.includes(keyword);
+
+
+                let matchesLocation =
+                    location === "" ||
+                    text.includes(location);
+
+
+                if (
+                    matchesKeyword &&
+                    matchesLocation
+                ) {
+
+                    job.style.display = "block";
+
+                } else {
+
+                    job.style.display = "none";
+
+                }
+
+            });
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

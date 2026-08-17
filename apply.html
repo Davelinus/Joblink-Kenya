@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Job Application | JobLink Kenya</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7fb;
+            color: #222;
+        }
+
+        nav {
+            background: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #1261d6;
+        }
+
+        .logo span {
+            color: #111;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #1261d6;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 850px;
+            margin: 40px auto;
+        }
+
+        .job-card {
+            background: linear-gradient(
+                135deg,
+                #1261d6,
+                #063b91
+            );
+
+            color: white;
+
+            padding: 30px;
+
+            border-radius: 15px;
+
+            margin-bottom: 25px;
+        }
+
+        .job-card h1 {
+            margin-bottom: 15px;
+        }
+
+        .job-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .job-info p {
+            padding: 8px 0;
+        }
+
+        .application-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+        }
+
+        .application-card h2 {
+            margin-bottom: 25px;
+            color: #1261d6;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #1261d6;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 7px;
+            background: #1261d6;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background: #084aa8;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #1261d6;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .message {
+            display: none;
+            padding: 18px;
+            margin-top: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .success {
+            display: block;
+            background: #d1e7dd;
+            color: #0f5132;
+        }
+
+        .error {
+            display: block;
+            background: #f8d7da;
+            color: #842029;
+        }
+
+        @media (max-width: 650px) {
+
+            .job-info {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                width: 94%;
+            }
+
+            .application-card {
+                padding: 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<nav>
+
+    <div class="logo">
+        JobLink<span> Kenya</span>
+    </div>
+
+    <a href="job seeker 3.html">
+        Back to Jobs
+    </a>
+
+</nav>
+
+
+<div class="container">
+
+
+    <a
+        href="job seeker 3.html"
+        class="back-btn"
+    >
+        ← Back to Jobs
+    </a>
+
+
+    <!-- SELECTED JOB -->
+
+    <div class="job-card">
+
+        <h1 id="jobTitle">
+            Loading job...
+        </h1>
+
+        <div class="job-info">
+
+            <p>
+                🏢
+                <strong>Company:</strong>
+                <span id="jobCompany">
+                    Loading...
+                </span>
+            </p>
+
+            <p>
+                📍
+                <strong>Location:</strong>
+                <span id="jobLocation">
+                    Loading...
+                </span>
+            </p>
+
+            <p>
+                💰
+                <strong>Salary:</strong>
+                <span id="jobSalary">
+                    Loading...
+                </span>
+            </p>
+
+            <p>
+                💼
+                <strong>Job Type:</strong>
+                <span id="jobType">
+                    Loading...
+                </span>
+            </p>
+
+            <p>
+                🆔
+                <strong>Job ID:</strong>
+                <span id="jobId">
+                    Loading...
+                </span>
+            </p>
+
+            <p>
+                🛠️
+                <strong>Skills:</strong>
+                <span id="jobSkills">
+                    Loading...
+                </span>
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- APPLICATION FORM -->
+
+    <div class="application-card">
+
+        <h2>
+            Submit Your Application
+        </h2>
+
+
+        <form id="applicationForm">
+
+
+            <div class="form-group">
+
+                <label for="applicantName">
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    id="applicantName"
+                    placeholder="Enter your full name"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="phone">
+                    Phone Number
+                </label>
+
+                <input
+                    type="tel"
+                    id="phone"
+                    placeholder="Example: 0712345678"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="skills">
+                    Your Skills
+                </label>
+
+                <textarea
+                    id="skills"
+                    placeholder="Example: AutoCAD, Revit, SketchUp, communication..."
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="coverLetter">
+                    Cover Letter
+                </label>
+
+                <textarea
+                    id="coverLetter"
+                    placeholder="Tell the employer why you are suitable for this job..."
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="submit-btn"
+            >
+                Submit Application
+            </button>
+
+
+        </form>
+
+
+        <div
+            id="message"
+            class="message"
+        ></div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+/* =========================================
+   ESCAPE HTML
+========================================= */
+
+function escapeHtml(value) {
+
+    return String(value || "")
+
+        .replace(/&/g, "&amp;")
+
+        .replace(/</g, "&lt;")
+
+        .replace(/>/g, "&gt;")
+
+        .replace(/"/g, "&quot;")
+
+        .replace(/'/g, "&#039;");
+
+}
+
+
+
+/* =========================================
+   GET SELECTED JOB
+========================================= */
+
+const selectedJob =
+    JSON.parse(
+        localStorage.getItem(
+            "selectedJob"
+        )
+    );
+
+
+
+/* =========================================
+   CHECK JOB
+========================================= */
+
+if (!selectedJob) {
+
+    document.getElementById(
+        "jobTitle"
+    ).textContent =
+        "No Job Selected";
+
+    document.getElementById(
+        "jobCompany"
+    ).textContent =
+        "Unknown";
+
+    document.getElementById(
+        "jobLocation"
+    ).textContent =
+        "Unknown";
+
+    document.getElementById(
+        "jobSalary"
+    ).textContent =
+        "Unknown";
+
+    document.getElementById(
+        "jobType"
+    ).textContent =
+        "Unknown";
+
+    document.getElementById(
+        "jobId"
+    ).textContent =
+        "Unknown";
+
+    document.getElementById(
+        "jobSkills"
+    ).textContent =
+        "Unknown";
+
+}
+
+
+
+/* =========================================
+   DISPLAY JOB
+========================================= */
+
+if (selectedJob) {
+
+    document.getElementById(
+        "jobTitle"
+    ).textContent =
+        selectedJob.title ||
+        "Untitled Job";
+
+
+    document.getElementById(
+        "jobCompany"
+    ).textContent =
+        selectedJob.company ||
+        "Not provided";
+
+
+    document.getElementById(
+        "jobLocation"
+    ).textContent =
+        selectedJob.location ||
+        "Not provided";
+
+
+    document.getElementById(
+        "jobSalary"
+    ).textContent =
+        selectedJob.salary ||
+        "Not provided";
+
+
+    document.getElementById(
+        "jobType"
+    ).textContent =
+        selectedJob.type ||
+        "Not provided";
+
+
+    document.getElementById(
+        "jobId"
+    ).textContent =
+        selectedJob.jobId ||
+        "Not available";
+
+
+    document.getElementById(
+        "jobSkills"
+    ).textContent =
+        selectedJob.skills ||
+        "Not provided";
+
+}
+
+
+
+/* =========================================
+   SUBMIT APPLICATION
+========================================= */
+
+document.getElementById(
+    "applicationForm"
+).addEventListener(
+    "submit",
+    function(event) {
+
+        event.preventDefault();
+
+
+        /* Make sure a job exists */
+
+        if (!selectedJob) {
+
+            showMessage(
+                "No job has been selected.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        /* Get applicant information */
+
+        const applicant =
+            document
+                .getElementById(
+                    "applicantName"
+                )
+                .value
+                .trim();
+
+
+        const email =
+            document
+                .getElementById(
+                    "email"
+                )
+                .value
+                .trim();
+
+
+        const phone =
+            document
+                .getElementById(
+                    "phone"
+                )
+                .value
+                .trim();
+
+
+        const skills =
+            document
+                .getElementById(
+                    "skills"
+                )
+                .value
+                .trim();
+
+
+        const coverLetter =
+            document
+                .getElementById(
+                    "coverLetter"
+                )
+                .value
+                .trim();
+
+
+
+        /* =====================================
+           CREATE APPLICATION
+        ===================================== */
+
+        const application = {
+
+            /* Applicant */
+
+            applicant:
+                applicant,
+
+
+            email:
+                email,
+
+
+            phone:
+                phone,
+
+
+            skills:
+                skills,
+
+
+            coverLetter:
+                coverLetter,
+
+
+            /* Job information */
+
+            job:
+                selectedJob.title ||
+                "Unknown Job",
+
+
+            company:
+                selectedJob.company ||
+                "Not provided",
+
+
+            location:
+                selectedJob.location ||
+                "Not provided",
+
+
+            salary:
+                selectedJob.salary ||
+                "Not provided",
+
+
+            jobId:
+                selectedJob.jobId ||
+                "Not available",
+
+
+            jobType:
+                selectedJob.type ||
+                "Not provided",
+
+
+            category:
+                selectedJob.category ||
+                "Not provided",
+
+
+            /* Application information */
+
+            date:
+                new Date().toLocaleDateString(
+                    "en-GB"
+                ),
+
+
+            status:
+                "Submitted",
+
+
+            submittedAt:
+                new Date().toISOString()
+
+        };
+
+
+
+        /* =====================================
+           GET EXISTING APPLICATIONS
+        ===================================== */
+
+        let applications =
+            JSON.parse(
+                localStorage.getItem(
+                    "jobApplications"
+                )
+            ) || [];
+
+
+
+        /* =====================================
+           SAVE APPLICATION
+        ===================================== */
+
+        applications.push(
+            application
+        );
+
+
+        localStorage.setItem(
+            "jobApplications",
+            JSON.stringify(
+                applications
+            )
+        );
+
+
+
+        /* =====================================
+           SUCCESS MESSAGE
+        ===================================== */
+
+        showMessage(
+            "Application submitted successfully!",
+            "success"
+        );
+
+
+
+        /* Disable button */
+
+        const button =
+            document.querySelector(
+                ".submit-btn"
+            );
+
+
+        button.disabled = true;
+
+        button.textContent =
+            "Application Submitted ✓";
+
+
+        button.style.background =
+            "#198754";
+
+    }
+);
+
+
+
+/* =========================================
+   MESSAGE FUNCTION
+========================================= */
+
+function showMessage(
+    text,
+    type
+) {
+
+    const message =
+        document.getElementById(
+            "message"
+        );
+
+
+    message.textContent =
+        text;
+
+
+    message.className =
+        "message " +
+        type;
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
